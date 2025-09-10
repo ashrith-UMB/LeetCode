@@ -1,19 +1,17 @@
-// Last updated: 9/10/2025, 3:51:58 PM
+// Last updated: 9/10/2025, 3:36:40 PM
 class Solution {
-    public List<List<String>> groupAnagrams(String[] strs) {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int complement;
 
-        Map<String, List<String>> results = new HashMap<>();
+        for(int i = 0; i < nums.length; i++){
+            complement = target - nums[i];
 
-        for(String str : strs){
-            char[] charArray = str.toCharArray();
-            Arrays.sort(charArray);
-
-            String sortedString = new String(charArray);
-            results.putIfAbsent(sortedString, new ArrayList<>());
-            results.get(sortedString).add(str);
+            if(map.containsKey(complement)){
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
         }
-
-        return new ArrayList<>(results.values());
-        
+        return new int[]{0,0};
     }
 }
